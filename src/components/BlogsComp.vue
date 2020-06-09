@@ -4,18 +4,20 @@
       <div class="card-body">
         <h4 class="card-title">{{blog.title}}</h4>
         <p class="card-text">Author: {{blog.creator.name}}</p>
-        <button type="button" class="btn btn-outline-success mr-2">Show More</button>
+        <router-link :to="{name: 'BlogDetails', params: {id: blog.id}}">
+          <button type="button" class="btn btn-outline-success mr-2">Show More</button>
+        </router-link>
         <button
           type="button"
           class="btn btn-outline-warning mr-2"
-          v-if="$auth.isAuthenticated"
+          v-if="$auth.isAuthenticated && isCreator"
           @click="editBlog"
         >Edit</button>
         <button
           type="button"
           class="btn btn-outline-danger mr-2"
           @click="deleteBlog"
-          v-if="$auth.isAuthenticated"
+          v-if="$auth.isAuthenticated && isCreator"
         >Delete</button>
       </div>
     </div>

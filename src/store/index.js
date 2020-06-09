@@ -10,6 +10,7 @@ export default new Vuex.Store({
     profile: {},
     blogs: [],
     comments: [],
+    activeBlog: {},
   },
   mutations: {
     setProfile(state, profile) {
@@ -20,6 +21,12 @@ export default new Vuex.Store({
     },
     addBlog(state, data) {
       state.blogs.push(data);
+    },
+    setActiveBlog(state, blog) {
+      state.activeBlog = blog;
+    },
+    setComments(state, comments) {
+      state.comments = comments;
     },
   },
   actions: {
@@ -47,9 +54,10 @@ export default new Vuex.Store({
       }
     },
     async editBlog({ commit, dispatch }) {},
-    async deleteBlog({ commit, dispatch }, _id) {
+    async deleteBlog({ commit, dispatch }, id) {
       try {
-        let res = await api.delete("blogs/" + _id);
+        let res = await api.delete("blogs/" + id);
+        dispatch("getAllBlogs");
       } catch (error) {
         console.error(error);
       }
@@ -62,5 +70,20 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async getBlogById({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("blogs/" + id);
+        commit("setActiveBlog", res.data);
+        commit("setComments", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    // FIXME get blog by id
+    // this will return a blog and its comments, commit both to the state individually
+    //setActiveBlog
+    //setActiveComments
+
+    // FIXME add comment, delete comment
   },
 });

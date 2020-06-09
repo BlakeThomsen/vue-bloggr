@@ -15,12 +15,13 @@ export default {
     await onAuth();
     if (this.$auth.isAuthenticated) {
       setBearer(this.$auth.bearer);
+      this.$store.dispatch("getProfile");
       //NOTE if you want to do something everytime the user logs in, do so here
     }
   },
   components: {
-    Navbar,
-  },
+    Navbar
+  }
 };
 </script>
 <style lang="scss">

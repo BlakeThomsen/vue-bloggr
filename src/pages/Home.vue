@@ -8,12 +8,6 @@
             <div class="form-group">
               <input type="text" class="form-control m-2" placeholder="Title" v-model="blog.title" />
               <input type="text" class="form-control m-2" placeholder="Body" v-model="blog.body" />
-              <input
-                type="text"
-                class="form-control m-2"
-                placeholder="ImgUrl"
-                v-model="blog.ImgUrl"
-              />
             </div>
             <button type="submit" class="btn btn-outline-success">Submit</button>
           </form>
